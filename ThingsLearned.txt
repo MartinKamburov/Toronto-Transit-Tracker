@@ -1,0 +1,58 @@
+Idempotency means an operation produces the exact same result 
+whether you run it once or multiple times. In Data engineering 
+it is essential because distributed systems, networks, and batch 
+pipelines fail constantly.
+
+Data Pipelines are generally categorized by how they process,
+schedule, or structure data flow.
+
+    1. Processing Approach
+        
+        - Batch Processing Pipelines: collect and process data in 
+        large, scheduled groups (e.g., via cron jobs running hourly or nightly). 
+        They are cost-effective and ideal for heavy historical or aggregate reporting.
+        
+        - Real-Time / Streaming Pipelines: process individual data points
+        continuously as they are generated with near-zero latency. Used for 
+        fraud detection, IoT sensors, or live activity feeds.
+
+        - Micro-Batch Pipelines: A hybrid approach that processes small chunks 
+        of data every few seconds or minutes, balancing lower latency with
+        batch-style efficiency.
+
+        - On-Demand (Event-Driven) Pipelines: Triggered dynamically by specific 
+        actions or wbehooks (such as a user sign-up or a database insert) rather 
+        than a rigid clock schedule.
+
+    2. Transformation & Loading Order:
+    
+        - ETL (Extract, Transform, Load): Data is extracted from sources, cleaned 
+        and transformed on a separate staging engine, and then loaded into a target 
+        data warehouse. 
+
+        - ELT (Extract, Load, Transform): Raw data is extracted and loaded directly into
+        a cloud data warehouse first, then transformed in-place using the warehouse's
+        high-speed compute power.
+
+        - Reverse ETL: Moves processed, aggregated, or scored data out of a centralized data
+        warehouse and pushes it back into operational business tools (like Salesforce, HubSpot, etc.)
+
+    3. Common Architecture & Design Patterns:
+        
+        - Lambda Architecture: Combines both a batch layer (for accurate, 
+        comprehensive historical views) and a real-time speed layer
+        (for low-latency updates) in parallel.
+
+        - Kappa Architecture: Simplifies Lambda by running everything through a 
+        single real-time stream-processing engine, treating historical data as a replayed 
+        stream.
+
+        - Change Data Capture (CDC) Pipelines: Monitor database transaction logs to
+        capture only inserted, updated, or deleted rows incrementally, avoiding full-table
+        scans.
+
+        - Medallion / Lakehouse Pipelines: Structure data into progressive quality
+        tiers-typically Bronze(raw), Silver(cleaned and conformed), and Gold (business-level or analytics-ready)
+
+        - AI / RAG Pipelines: Chunk, embed and store unstructured text or documents into 
+        vector databases to supply real-time context for LLMs.
