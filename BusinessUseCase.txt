@@ -1,0 +1,4 @@
+What does the end user want to see within this Go Train tracker:
+    - Get most relevant service alert. 
+    - Show cancelled trips/stops
+    - Show the most relevant 
